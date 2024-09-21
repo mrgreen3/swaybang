@@ -1,0 +1,63 @@
+
+Welcome to ArchBang Live a live iso [www.archbang.org/Guide].
+
+Information here is as up to date as possible.
+
+Please do not post issues or problems related to ArchBang on Archlinux forums it will result in at best your thread closed or worse deleted.
+
+====Xfce4 Window Manager====
+
+Will give a brief overview of ArchBang version.
+
+Some useful keybinds are:
+
+Control+Alt+t terminal
+Super+w Firefox browser
+Super+f Thunar file manager
+
+You will also see launchers on panel for above, as well as workspaces, networking, system tray and clock.
+
+====Installation====
+
+To run installer open a terminal, change into AB_Scripts directory and run abinstall:
+
+cd ~/AB_Scripts
+sudo ./abinstall
+
+The installer is menu driven and very easy to follow.
+
+===Pacman===
+
+To get pacman running live you will need a working network connection, either wired [connects automatically] or wireless via network icon on panel [click on it!].
+
+Live you do not need to do the following commands but post install you will need to set up pacman keys open a terminal and run:
+
+sudo pacman-key --init
+sudo pacman-key --populate
+sudo pacman -Syyu archlinux-keyring
+
+This will create keys, refresh package cache and install archlinux-keyring.
+
+Then you can search for a package of choice using:
+
+sudo pacman -Ss
+
+Install a pacakge using
+
+sudo pacman -S
+
+
+For more help, guides search the Arch Wiki [https://wiki.archlinux.org/]
+
+====Tips and tricks?====
+
+If your drive space fills up live then run the following to double size of storage.
+
+sudo mount -o remount,size=8G /run/archiso/cowspace
+
+By default pacman mirrorlist is un-commented to allow it to work live, read Arch wiki guide on mirrors and setting them up here:
+
+https://wiki.archlinux.org/title/Mirrors
+
+© 2024 ArchBang Live Iso
+

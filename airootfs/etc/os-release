@@ -1,0 +1,5 @@
+NAME=ArchBang
+ID=arch
+PRETTY_NAME=ArchBang
+ANSI_COLOR="0;32"
+HOME_URL='https://archbang.org'

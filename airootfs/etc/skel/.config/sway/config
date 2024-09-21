@@ -1,0 +1,230 @@
+#
+#Sway config, heavily modified by Mr Green
+
+exec swaymsg workspace number 1
+
+#========================#
+# Appearance and Theming #
+#========================#
+# Declare Colors:
+set $background #332b2b
+set $color_urgent #fb4934
+set $text_color #ffffff
+set $title_bg_unfocused #666666
+set $title_outline_active #588440
+set $title_outline_unfocused #332b2b
+
+# Set Colors:           Border                   Background          Text          Indicator             Child Border
+client.background       $background
+client.focused          $title_outline_active    $background         $text_color   $title_outline_active $title_outline_active
+client.focused_inactive $title_outline_unfocused $background         $text_color   $title_outline_unfocused $title_outline_unfocused
+client.unfocused        $title_outline_unfocused $title_bg_unfocused $text_color   $title_outline_active
+client.urgent           $color_urgent            $color_urgent       $color_urgent $color_urgent         $color_urgent
+
+# Configure the default border:
+default_border pixel 2
+smart_borders enable
+
+
+# Set the Wallpaper:
+output * bg $HOME/Backgrounds/storm.jpg fill
+
+input * {
+    xkb_layout "us"
+}
+#====================================#
+# Activate the panel                 #
+#====================================#
+# Set the waybar command for the application launcher:
+bar {
+    swaybar_command waybar
+}
+
+#====================================#
+# Keyboard Shortcuts (Sway-specific) #
+#====================================#
+# Set the modifier key to super:
+set $mod Mod4
+
+# Set the ALT key to $alt (since Mod1 is harder to remember):
+set $alt Mod1
+
+# Set up a shortcut to reload this config file:
+bindsym $mod+Shift+c reload
+
+#========================================#
+# Keyboard Shortcuts (Window Management) #
+#========================================#
+# Move focus to another window:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focus to another window ("cult of vim" version):
+#bindsym $mod+j focus down
+#bindsym $mod+h focus left
+#bindsym $mod+l focus right
+#bindsym $mod+k focus up
+
+# Move the window:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move the the window ("cult of vim" version):
+#bindsym $mod+Shift+h move left
+#bindsym $mod+Shift+j move down
+#bindsym $mod+Shift+k move up
+#bindsym $mod+Shift+l move right
+
+floating_modifier $mod normal
+
+#=================================#
+# Keyboard Shortcuts (Workspaces) #
+#=================================#
+# Switch to workspace
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "10"
+
+# Move between workspaces
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+Space floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+tab focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+
+
+#=================================#
+# Keyboard Shortcuts (Scratchpad) #
+#=================================#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+s move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+s scratchpad show
+
+
+#===============================#
+# Keyboard Shortcuts (Hardware) #
+#===============================#
+
+# Brightness
+bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec light -A 10
+
+
+#=============================================#
+# Keyboard Shortcuts (launching applications) #
+#=============================================#
+
+# Firefox settings
+bindsym $mod+w exec firefox
+assign [app_id="firefox"] $ws3
+exec firefox
+
+# Open a file manager:
+bindsym ctrl+$mod+f exec thunar 
+
+# Open a terminal emulator:
+bindsym $mod+Return exec foot 
+# Kill focused window:
+bindsym $mod+q kill
+
+# Open the application launcher:
+bindsym $mod+r exec  rofi -show drun | xargs swaymsg exec --
+
+#======#
+# Misc #
+#======#
+include /etc/sway/config-vars.d/*
+include /etc/sway/config.d/*
+
+#blur enable
+#shadows enable
+#default_dim_inactive 0.3 
+#corner_radius 7
+
+# Screenshots:
+set $grimshot /usr/share/sway-contrib/grimshot
+# Use Print for whole screen, stored Pictures folder
+bindsym Print            exec $grimshot save output 
+bindsym $mod+Shift+Print exec $grimshot save area
+bindsym $mod+Print       exec $grimshot save active
+bindsym $mod+Ctrl+Print  exec $grimshot save window
+
+# for_window [app_id="float"] floating enable
+
+exec swayidle -w \
+	timeout 600 'swaylock -f' \
+	timeout 605 'swaymsg "output * power off"' \
+	resume 'swaymsg "output * power on"'
+
+
+# Other existing configurations...
+
+# Keybinding to lock the screen might be better in a script..
+bindsym $mod+l exec swaylock
+
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Gaps I do not really use but good for screenshots...
+gaps inner 3
+gaps outer 2 
+
+# Set specific gaps for workspace 1
+workspace 1 gaps inner 2
+workspace 1 gaps outer 2 
+
+# Increment gaps dynamically
+bindsym $mod+equal exec "swaymsg gaps inner all plus 5"
+bindsym $mod+minus exec "swaymsg gaps inner all minus 5"
+
+# No gaps on a workspace with only one window present
+smart_gaps on
+
+exec swaymsg "workspace $ws1; exec foot;" 
+

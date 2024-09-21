@@ -1,0 +1,19 @@
+/*******************************************************
+ * ROFI configs i3 Apps menu for EndeavourOS
+ * Maintainer: joekamprad [joekamprad //a_t// endeavouros.com]
+ * Badly modified by MrGreen ;-) ....
+ *******************************************************/
+configuration {
+    font:                "Noto Sans Regular 10";
+    show-icons:          true;
+    icon-theme:          "Qogir";
+    display-drun:        "Apps";
+    drun-display-format: "{name}";
+    scroll-method:       0;
+    disable-history:     false;
+    sidebar-mode:        false;
+	terminal:            "/usr/bin/foot";
+}
+
+/* set from within the following [global] */
+@theme "/home/mrgreen/.config/rofi/arc-dark.rasi" 
